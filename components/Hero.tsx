@@ -1,19 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Award, Clock, Heart } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const slides = ['/assets/lanche.jpeg', '/assets/lanche1.jpeg', '/assets/lanche.jpeg'];
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const resetAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    autoPlayRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
-    return () => clearInterval(timer);
+  };
+
+  useEffect(() => {
+    resetAutoPlay();
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
   }, [slides.length]);
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    resetAutoPlay();
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    resetAutoPlay();
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+
+    setIsDragging(false);
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   const scrollToMenu = () => {
     const menuSection = document.getElementById('menu');
@@ -84,48 +134,73 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl animate-on-scroll">
-            <div className="relative w-full h-full">
+          <div 
+            className="relative h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl animate-on-scroll"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="relative w-full h-full select-none">
               {slides.map((slide, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                    index === currentSlide ? 'opacity-100' : 'opacity-0'
+                  className={`absolute inset-0 transition-all duration-700 ease-out ${
+                    index === currentSlide 
+                      ? 'opacity-100 scale-100' 
+                      : 'opacity-0 scale-95'
                   }`}
                 >
                   <img
                     src={slide}
                     alt={`Hambúrguer Gourmet ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover pointer-events-none"
+                    draggable="false"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/60 md:bg-gradient-to-r md:from-black/90 md:via-black/20 md:to-transparent"></div>
                 </div>
               ))}
             </div>
 
+            {/* Setas de navegação - mais visíveis no mobile */}
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 glass-effect border border-white/20 p-3 rounded-full text-white hover:bg-white/20 transition-all duration-300 z-10"
+              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 glass-effect border border-white/20 p-2 md:p-3 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} className="md:w-6 md:h-6" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 glass-effect border border-white/20 p-3 rounded-full text-white hover:bg-white/20 transition-all duration-300 z-10"
+              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 glass-effect border border-white/20 p-2 md:p-3 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} className="md:w-6 md:h-6" />
             </button>
 
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {/* Indicadores - maiores no mobile */}
+            <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-2 z-10">
               {slides.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === currentSlide ? 'w-8 bg-amber-500' : 'w-2 bg-white/50 hover:bg-white/80'
+                  onClick={() => {
+                    setCurrentSlide(index);
+                    resetAutoPlay();
+                  }}
+                  className={`h-2 md:h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'w-10 md:w-8 bg-amber-500 shadow-lg shadow-amber-500/50' 
+                      : 'w-2 bg-white/50 hover:bg-white/80 active:scale-90'
                   }`}
+                  aria-label={`Ir para slide ${index + 1}`}
                 />
               ))}
+            </div>
+
+            {/* Indicador de swipe para mobile */}
+            <div className="md:hidden absolute top-4 left-1/2 -translate-x-1/2 z-10">
+              <div className="glass-effect border border-white/20 rounded-full px-4 py-2 flex items-center gap-2">
+                <ChevronLeft size={14} className="text-white/60 animate-pulse" />
+                <span className="text-white/80 text-xs font-medium">Deslize</span>
+                <ChevronRight size={14} className="text-white/60 animate-pulse" />
+              </div>
             </div>
           </div>
         </div>

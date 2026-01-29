@@ -2,6 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import FeaturedCarousel from './components/FeaturedCarousel';
 import Benefits from './components/Benefits';
 import MenuSection from './components/MenuSection';
 import AISommelier from './components/AISommelier';
@@ -55,6 +56,9 @@ const App: React.FC = () => {
       
       <main>
         <Hero />
+        
+        {/* Featured Carousel - Mobile Only */}
+        <FeaturedCarousel />
         
         {/* Benefits Section */}
         <Benefits />
