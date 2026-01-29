@@ -81,9 +81,6 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
         <button onClick={() => scrollToSection('about')} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Sobre
         </button>
-        <button onClick={() => scrollToSection('ai-sommelier')} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
-          IA Sommelier
-        </button>
         <button onClick={() => scrollToSection('contact')} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Contato
         </button>
