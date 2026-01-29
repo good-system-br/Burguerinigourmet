@@ -5,6 +5,9 @@ import Hero from './components/Hero';
 import FeaturedCarousel from './components/FeaturedCarousel';
 import Benefits from './components/Benefits';
 import MenuSection from './components/MenuSection';
+import Gallery from './components/Gallery';
+import VideoShowcase from './components/VideoShowcase';
+import PreparationProcess from './components/PreparationProcess';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import CartModal from './components/CartModal';
@@ -110,6 +113,15 @@ const App: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Gallery Section */}
+        <Gallery />
+
+        {/* Video Showcase */}
+        <VideoShowcase />
+
+        {/* Preparation Process */}
+        <PreparationProcess />
 
         {/* CTA Section */}
         <section className="relative py-24 md:py-32 bg-gradient-to-b from-zinc-950 via-black to-zinc-950 overflow-hidden">
