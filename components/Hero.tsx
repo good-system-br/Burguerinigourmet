@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Award, Clock, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Award, Clock, Heart, UtensilsCrossed, MapPin, Phone, Instagram } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -84,6 +84,61 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        {/* Cards de Navegação - Inspirado no Johns Burguer */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 animate-on-scroll">
+          <button
+            onClick={scrollToMenu}
+            className="group glass-effect border border-white/10 rounded-2xl p-6 hover:border-amber-500/50 transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <div className="flex flex-col items-center gap-3">
+              <div className="bg-gradient-to-r from-amber-500 to-orange-600 p-4 rounded-xl group-hover:shadow-lg group-hover:shadow-amber-500/50 transition-all duration-300">
+                <UtensilsCrossed className="text-white" size={28} />
+              </div>
+              <span className="text-white font-bold text-lg">Cardápio</span>
+            </div>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group glass-effect border border-white/10 rounded-2xl p-6 hover:border-amber-500/50 transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <div className="flex flex-col items-center gap-3">
+              <div className="bg-gradient-to-r from-amber-500 to-orange-600 p-4 rounded-xl group-hover:shadow-lg group-hover:shadow-amber-500/50 transition-all duration-300">
+                <MapPin className="text-white" size={28} />
+              </div>
+              <span className="text-white font-bold text-lg">Unidades</span>
+            </div>
+          </button>
+
+          <a
+            href="https://wa.me/5511999999999"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group glass-effect border border-white/10 rounded-2xl p-6 hover:border-green-500/50 transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <div className="flex flex-col items-center gap-3">
+              <div className="bg-gradient-to-r from-green-500 to-green-600 p-4 rounded-xl group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all duration-300">
+                <Phone className="text-white" size={28} />
+              </div>
+              <span className="text-white font-bold text-lg">Delivery</span>
+            </div>
+          </a>
+
+          <a
+            href="https://instagram.com/burguerinigourmet"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group glass-effect border border-white/10 rounded-2xl p-6 hover:border-pink-500/50 transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <div className="flex flex-col items-center gap-3">
+              <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-4 rounded-xl group-hover:shadow-lg group-hover:shadow-pink-500/50 transition-all duration-300">
+                <Instagram className="text-white" size={28} />
+              </div>
+              <span className="text-white font-bold text-lg">Instagram</span>
+            </div>
+          </a>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-left space-y-8 animate-on-scroll">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-600/20 backdrop-blur-sm border border-amber-500/30 rounded-full px-4 py-2">
@@ -116,21 +171,6 @@ const Hero: React.FC = () => {
                   <p className="text-gray-400 text-sm">Avaliação</p>
                 </div>
               </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4 pt-4">
-              <button
-                onClick={scrollToMenu}
-                className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 transform hover:scale-105"
-              >
-                Ver Cardápio
-              </button>
-              <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="glass-effect border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all duration-300"
-              >
-                Fale Conosco
-              </button>
             </div>
           </div>
 
