@@ -6,6 +6,7 @@ import FeaturedCarousel from './components/FeaturedCarousel';
 import Benefits from './components/Benefits';
 import MenuSection from './components/MenuSection';
 import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
 import CartModal from './components/CartModal';
 import Footer from './components/Footer';
 import { MenuItem, CartItem } from './types';
@@ -67,6 +68,9 @@ const App: React.FC = () => {
 
         {/* Testimonials */}
         <Testimonials />
+
+        {/* Contact Section */}
+        <Contact />
 
         {/* Story Section */}
         <section id="about" className="relative py-24 md:py-32 bg-black overflow-hidden">
