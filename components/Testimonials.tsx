@@ -100,10 +100,6 @@ const Testimonials: React.FC = () => {
             <div className="text-4xl md:text-5xl font-bold text-amber-500 mb-2">50k+</div>
             <p className="text-gray-500 text-sm uppercase tracking-wider">Burgers Vendidos</p>
           </div>
-          <div className="p-6">
-            <div className="text-4xl md:text-5xl font-bold text-amber-500 mb-2">3</div>
-            <p className="text-gray-500 text-sm uppercase tracking-wider">Unidades</p>
-          </div>
         </div>
       </div>
     </section>
