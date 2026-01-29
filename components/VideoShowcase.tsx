@@ -149,29 +149,32 @@ const VideoShowcase: React.FC = () => {
       {/* Video Modal */}
       {selectedVideo && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm animate-fadeInUp"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm animate-fadeInUp p-4"
           onClick={() => setSelectedVideo(null)}
         >
           <button
             onClick={() => setSelectedVideo(null)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 z-10"
+            className="absolute top-4 right-4 md:top-6 md:right-6 p-2 md:p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 z-10"
           >
-            <X size={28} className="text-white" />
+            <X size={24} className="text-white md:w-7 md:h-7" />
           </button>
 
-          <div className="max-w-4xl w-full mx-auto px-6" onClick={(e) => e.stopPropagation()}>
-            <div className="relative w-full pb-[56.25%]">
+          <div className="max-w-4xl w-full mx-auto" onClick={(e) => e.stopPropagation()}>
+            {/* Video container */}
+            <div className="relative w-full pb-[56.25%] mb-6">
               <iframe
                 src={selectedVideo.videoUrl}
                 title={selectedVideo.title}
-                className="absolute top-0 left-0 w-full h-full rounded-2xl border-2 border-amber-500/50"
+                className="absolute top-0 left-0 w-full h-full rounded-xl md:rounded-2xl border-2 border-amber-500/50"
                 allowFullScreen
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               ></iframe>
             </div>
-            <div className="mt-8 text-center">
-              <h3 className="text-white text-3xl font-bold mb-3">{selectedVideo.title}</h3>
-              <p className="text-gray-300 text-lg">{selectedVideo.description}</p>
+
+            {/* Info - Scrollable on mobile */}
+            <div className="max-h-[30vh] md:max-h-none overflow-y-auto md:overflow-visible px-2 md:px-0">
+              <h3 className="text-white text-xl md:text-3xl font-bold mb-2 md:mb-3">{selectedVideo.title}</h3>
+              <p className="text-gray-300 text-sm md:text-lg">{selectedVideo.description}</p>
             </div>
           </div>
         </div>

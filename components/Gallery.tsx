@@ -122,14 +122,14 @@ const Gallery: React.FC = () => {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm animate-fadeInUp"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm animate-fadeInUp p-4"
           onClick={() => setSelectedImage(null)}
         >
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 z-10"
+            className="absolute top-4 right-4 md:top-6 md:right-6 p-2 md:p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 z-10"
           >
-            <X size={28} className="text-white" />
+            <X size={24} className="text-white md:w-7 md:h-7" />
           </button>
 
           <button
@@ -137,20 +137,20 @@ const Gallery: React.FC = () => {
               e.stopPropagation();
               handlePrev();
             }}
-            className="absolute left-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 hover:scale-110 z-10"
+            className="absolute left-2 md:left-6 p-2 md:p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 hover:scale-110 z-10"
           >
-            <ChevronLeft size={28} className="text-white" />
+            <ChevronLeft size={20} className="text-white md:w-7 md:h-7" />
           </button>
 
-          <div className="max-w-4xl w-full mx-auto px-6 flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+          <div className="max-w-4xl w-full mx-auto flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
             <img
               src={selectedImage.src}
               alt={selectedImage.title}
-              className="w-full h-auto max-h-[60vh] object-cover rounded-2xl border border-amber-500/50"
+              className="w-full h-auto max-h-[50vh] md:max-h-[60vh] object-cover rounded-xl md:rounded-2xl border border-amber-500/50"
             />
-            <div className="mt-8 text-center">
-              <h3 className="text-white text-3xl font-bold mb-3">{selectedImage.title}</h3>
-              <p className="text-gray-300 text-lg">{selectedImage.description}</p>
+            <div className="mt-4 md:mt-8 text-center max-h-[15vh] overflow-y-auto px-2">
+              <h3 className="text-white text-lg md:text-3xl font-bold mb-2 md:mb-3">{selectedImage.title}</h3>
+              <p className="text-gray-300 text-sm md:text-lg">{selectedImage.description}</p>
             </div>
           </div>
 
@@ -159,9 +159,9 @@ const Gallery: React.FC = () => {
               e.stopPropagation();
               handleNext();
             }}
-            className="absolute right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 hover:scale-110 z-10"
+            className="absolute right-2 md:right-6 p-2 md:p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 hover:scale-110 z-10"
           >
-            <ChevronRight size={28} className="text-white" />
+            <ChevronRight size={20} className="text-white md:w-7 md:h-7" />
           </button>
         </div>
       )}
