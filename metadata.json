@@ -1,0 +1,7 @@
+{
+  "name": "Burguerini Gourmet",
+  "description": "A high-end, interactive gourmet burger experience featuring a digital menu, AI-powered burger recommendations, and a sleek dark-themed design.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
