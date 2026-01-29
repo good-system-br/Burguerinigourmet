@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Clock, Truck, Package, UtensilsCrossed } from 'lucide-react';
+import { MapPin, Phone, Clock, Truck, Package, UtensilsCrossed, Instagram } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
@@ -135,6 +135,17 @@ const Contact: React.FC = () => {
             >
               <Phone size={24} />
               <span>Enviar Mensagem WhatsApp</span>
+            </a>
+
+            {/* Instagram */}
+            <a 
+              href="https://www.instagram.com/burguerini/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-5 rounded-2xl font-bold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-pink-500/30 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3"
+            >
+              <Instagram size={24} />
+              <span>Seguir no Instagram</span>
             </a>
           </div>
         </div>
