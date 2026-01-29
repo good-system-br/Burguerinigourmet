@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { APP_CONFIG } from '../constants';
-import { Instagram, Facebook, Phone, MapPin, Mail, Clock } from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -73,59 +73,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-bold uppercase tracking-wider text-xs mb-6 flex items-center gap-2">
-              <div className="w-6 h-px bg-amber-500"></div>
-              Contato
-            </h4>
-            <ul className="flex flex-col gap-4 text-gray-400 text-sm">
-              <li className="flex items-start gap-3 group">
-                <MapPin size={18} className="text-amber-500 flex-shrink-0 mt-0.5 group-hover:scale-110 smooth-transition" />
-                <span className="group-hover:text-white smooth-transition">{APP_CONFIG.address}</span>
-              </li>
-              <li className="flex items-center gap-3 group">
-                <Phone size={18} className="text-amber-500 flex-shrink-0 group-hover:scale-110 smooth-transition" />
-                <a href={`tel:${APP_CONFIG.phone}`} className="group-hover:text-white smooth-transition">
-                  {APP_CONFIG.phone}
-                </a>
-              </li>
-              <li className="flex items-center gap-3 group">
-                <Mail size={18} className="text-amber-500 flex-shrink-0 group-hover:scale-110 smooth-transition" />
-                <a href="mailto:contato@burguerini.com.br" className="group-hover:text-white smooth-transition">
-                  contato@burguerini.com.br
-                </a>
-              </li>
-              <li className="flex items-start gap-3 group">
-                <Clock size={18} className="text-amber-500 flex-shrink-0 mt-0.5 group-hover:scale-110 smooth-transition" />
-                <div className="group-hover:text-white smooth-transition">
-                  <p>Seg - Sex: 11h - 23h</p>
-                  <p>Sáb - Dom: 12h - 00h</p>
-                </div>
-              </li>
-            </ul>
-          </div>
 
-          {/* Newsletter */}
-          <div>
-            <h4 className="text-white font-bold uppercase tracking-wider text-xs mb-6 flex items-center gap-2">
-              <div className="w-6 h-px bg-amber-500"></div>
-              Newsletter
-            </h4>
-            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-              Inscreva-se para receber novidades e promoções exclusivas.
-            </p>
-            <div className="flex flex-col gap-3">
-              <input 
-                type="email" 
-                placeholder="Seu melhor e-mail" 
-                className="glass-effect border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-amber-500 outline-none smooth-transition placeholder:text-gray-600"
-              />
-              <button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black px-6 py-3 rounded-xl font-semibold text-sm uppercase tracking-wider smooth-transition hover:scale-105 shadow-lg shadow-amber-500/20">
-                Inscrever-se
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Bottom Bar */}
