@@ -5,7 +5,6 @@ import Hero from './components/Hero';
 import FeaturedCarousel from './components/FeaturedCarousel';
 import Benefits from './components/Benefits';
 import MenuSection from './components/MenuSection';
-import AISommelier from './components/AISommelier';
 import Testimonials from './components/Testimonials';
 import CartModal from './components/CartModal';
 import Footer from './components/Footer';
@@ -65,9 +64,6 @@ const App: React.FC = () => {
 
         {/* Menu Section */}
         <MenuSection onAddToCart={handleAddToCart} />
-        
-        {/* AI Sommelier */}
-        <AISommelier onAddToCart={handleAddToCart} />
 
         {/* Testimonials */}
         <Testimonials />
