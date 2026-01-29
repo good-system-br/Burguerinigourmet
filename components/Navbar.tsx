@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -11,34 +12,31 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/10">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection('home')}>
+          <Link to="/" className="flex items-center space-x-3 cursor-pointer">
             <img 
               src="/assets/logo.jpeg" 
               alt="Burguerini Gourmet" 
               className="h-12 w-12 rounded-full object-cover ring-2 ring-amber-400/30 shadow-lg shadow-amber-500/20"
             />
             <span className="text-2xl font-bold gradient-text hidden sm:block">Burguerini</span>
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollToSection('home')} className="nav-link">Início</button>
-            <button onClick={() => scrollToSection('menu')} className="nav-link">Cardápio</button>
-            <button onClick={() => scrollToSection('about')} className="nav-link">Sobre</button>
-            <button onClick={() => scrollToSection('contact')} className="nav-link">Contato</button>
+            <Link to="/" className="nav-link">Início</Link>
+            <Link to="/cardapio" className="nav-link">Cardápio</Link>
+            <Link to="/galeria" className="nav-link">Galeria</Link>
+            <Link to="/videos" className="nav-link">Vídeos</Link>
+            <Link to="/processo" className="nav-link">Processo</Link>
+            <Link to="/sobre" className="nav-link">Sobre</Link>
+            <Link to="/contato" className="nav-link">Contato</Link>
           </div>
 
           {/* Cart & Mobile Menu Button */}
@@ -71,18 +69,27 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
           isMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-full invisible'
         }`}
       >
-        <button onClick={() => scrollToSection('home')} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
+        <Link to="/" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Início
-        </button>
-        <button onClick={() => scrollToSection('menu')} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
+        </Link>
+        <Link to="/cardapio" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Cardápio
-        </button>
-        <button onClick={() => scrollToSection('about')} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
+        </Link>
+        <Link to="/galeria" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
+          Galeria
+        </Link>
+        <Link to="/videos" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
+          Vídeos
+        </Link>
+        <Link to="/processo" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
+          Processo
+        </Link>
+        <Link to="/sobre" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Sobre
-        </button>
-        <button onClick={() => scrollToSection('contact')} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
+        </Link>
+        <Link to="/contato" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Contato
-        </button>
+        </Link>
       </div>
     </nav>
   );
