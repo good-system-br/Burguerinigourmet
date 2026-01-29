@@ -2,7 +2,7 @@ import React from 'react';
 import Hero from '../components/Hero';
 import FeaturedCarousel from '../components/FeaturedCarousel';
 import Benefits from '../components/Benefits';
-import Testimonials from '../components/Testimonials';
+import GoogleReviews from '../components/GoogleReviews';
 
 interface HomeProps {
   onCartClick: () => void;
@@ -15,7 +15,7 @@ const Home: React.FC<HomeProps> = ({ onCartClick, cartItems }) => {
       <Hero onCartClick={onCartClick} cartItems={cartItems} />
       <FeaturedCarousel onCartClick={onCartClick} />
       <Benefits />
-      <Testimonials />
+      <GoogleReviews />
     </main>
   );
 };
