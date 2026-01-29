@@ -38,7 +38,6 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
             <button onClick={() => scrollToSection('home')} className="nav-link">Início</button>
             <button onClick={() => scrollToSection('menu')} className="nav-link">Cardápio</button>
             <button onClick={() => scrollToSection('about')} className="nav-link">Sobre</button>
-            <button onClick={() => scrollToSection('ai-sommelier')} className="nav-link">IA Sommelier</button>
             <button onClick={() => scrollToSection('contact')} className="nav-link">Contato</button>
           </div>
 
