@@ -122,7 +122,8 @@ const Gallery: React.FC = () => {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm animate-fadeInUp p-4"
+          role="dialog" aria-modal="true"
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/90 backdrop-blur-sm animate-fadeInUp p-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-y-auto"
           onClick={() => setSelectedImage(null)}
         >
           <button
@@ -151,6 +152,21 @@ const Gallery: React.FC = () => {
             <div className="mt-4 md:mt-8 text-center max-h-[15vh] overflow-y-auto px-2">
               <h3 className="text-white text-lg md:text-3xl font-bold mb-2 md:mb-3">{selectedImage.title}</h3>
               <p className="text-gray-300 text-sm md:text-lg">{selectedImage.description}</p>
+            </div>
+            <div className="mt-4 md:mt-6 flex flex-col md:flex-row gap-3 md:gap-4 w-full">
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="w-full md:w-auto bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-xl font-semibold"
+              >
+                Fechar
+              </button>
+              <a
+                href="/menu"
+                className="w-full md:w-auto bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-black px-5 py-3 rounded-xl font-bold"
+                onClick={() => setSelectedImage(null)}
+              >
+                Ver Cardápio
+              </a>
             </div>
           </div>
 
