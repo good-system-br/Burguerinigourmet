@@ -1,32 +1,70 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Flame } from 'lucide-react';
 import { MENU_ITEMS } from '../constants';
 
 const FeaturedCarousel: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
   const featuredItems = MENU_ITEMS.filter(item => item.category === 'burgers').slice(0, 5);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scrollToIndex = (index: number) => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const scrollAmount = 300;
-    const newPosition = direction === 'left' 
-      ? Math.max(0, scrollPosition - scrollAmount)
-      : Math.min(container.scrollWidth - container.clientWidth, scrollPosition + scrollAmount);
+    const scrollAmount = 296; // 280px width + 16px gap
+    const newPosition = index * scrollAmount;
 
     container.scrollTo({
       left: newPosition,
       behavior: 'smooth'
     });
     setScrollPosition(newPosition);
+    setCurrentIndex(index);
+  };
+
+  const resetAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    autoPlayRef.current = setInterval(() => {
+      setCurrentIndex((prev) => {
+        const nextIndex = (prev + 1) % featuredItems.length;
+        scrollToIndex(nextIndex);
+        return nextIndex;
+      });
+    }, 3000);
+  };
+
+  useEffect(() => {
+    resetAutoPlay();
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
+  }, [featuredItems.length]);
+
+  const scroll = (direction: 'left' | 'right') => {
+    const nextIndex = direction === 'left'
+      ? Math.max(0, currentIndex - 1)
+      : Math.min(featuredItems.length - 1, currentIndex + 1);
+    
+    scrollToIndex(nextIndex);
+    resetAutoPlay();
   };
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
-      setScrollPosition(scrollContainerRef.current.scrollLeft);
+      const newPosition = scrollContainerRef.current.scrollLeft;
+      setScrollPosition(newPosition);
+      const newIndex = Math.round(newPosition / 296);
+      if (newIndex !== currentIndex) {
+        setCurrentIndex(newIndex);
+        resetAutoPlay();
+      }
     }
   };
 
@@ -128,13 +166,18 @@ const FeaturedCarousel: React.FC = () => {
         {/* Indicador de scroll */}
         <div className="flex justify-center gap-1.5 mt-6">
           {featuredItems.map((_, index) => (
-            <div
+            <button
               key={index}
+              onClick={() => {
+                scrollToIndex(index);
+                resetAutoPlay();
+              }}
               className={`h-1 rounded-full transition-all duration-300 ${
-                Math.floor(scrollPosition / 280) === index
+                currentIndex === index
                   ? 'w-6 bg-amber-500'
-                  : 'w-1 bg-white/30'
+                  : 'w-1 bg-white/30 active:bg-white/50'
               }`}
+              aria-label={`Ir para item ${index + 1}`}
             />
           ))}
         </div>
