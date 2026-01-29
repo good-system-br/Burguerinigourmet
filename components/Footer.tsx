@@ -2,7 +2,6 @@
 import React from 'react';
 import { APP_CONFIG } from '../constants';
 import { Instagram, Facebook, Phone, MapPin, Mail, Clock } from 'lucide-react';
-import logo from '../assets/logo.jpeg';
 
 const Footer: React.FC = () => {
   return (
@@ -16,7 +15,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl overflow-hidden border-2 border-amber-500/20">
-                <img src={logo} alt="Logo Burguerini" className="w-full h-full object-cover" />
+                <img src="./assets/logo.jpeg" alt="Logo Burguerini" className="w-full h-full object-cover" />
               </div>
               <div>
                 <span className="text-2xl font-serif font-bold tracking-tight text-white">

@@ -2,7 +2,6 @@
 import React from 'react';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { APP_CONFIG } from '../constants';
-import logo from '../assets/logo.jpeg';
 
 interface NavbarProps {
   cartCount: number;
@@ -18,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick, onMenuToggle, i
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
           <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border-2 border-amber-500/20 group-hover:border-amber-500/40 smooth-transition">
-            <img src={logo} alt="Logo Burguerini" className="w-full h-full object-cover" />
+            <img src="./assets/logo.jpeg" alt="Logo Burguerini" className="w-full h-full object-cover" />
           </div>
           <div className="hidden sm:block">
             <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-white">

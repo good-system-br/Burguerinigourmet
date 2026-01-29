@@ -2,22 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import { APP_CONFIG } from '../constants';
 import { ArrowRight, Play } from 'lucide-react';
-import lanche from '../assets/lanche.jpeg';
-import lanche1 from '../assets/lanche1.jpeg';
 
 const SLIDES = [
   {
-    image: lanche,
+    image: './assets/lanche.jpeg',
     title: 'Onde o Fogo Encontra a Arte',
     subtitle: 'Artesanal & Gourmet',
   },
   {
-    image: lanche1,
+    image: './assets/lanche1.jpeg',
     title: 'Sabor que Desperta Sentidos',
     subtitle: 'Ingredientes Premium',
   },
   {
-    image: lanche,
+    image: './assets/lanche.jpeg',
     title: 'A Perfeição em Cada Mordida',
     subtitle: 'Blends Exclusivos',
   }
