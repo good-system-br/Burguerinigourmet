@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MenuItem } from '../types';
 import { MENU_ITEMS } from '../constants';
@@ -25,7 +24,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
 
   return (
     <section id="menu" className="relative py-24 md:py-32 bg-gradient-to-b from-zinc-950 via-black to-zinc-950 overflow-hidden">
-      {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 blur-[120px] rounded-full"></div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -41,7 +39,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
           </p>
         </div>
         
-        {/* Category Filter */}
         <div className="flex overflow-x-auto w-full no-scrollbar pb-4 mb-12 gap-3 justify-center">
           {categories.map(cat => (
             <button
@@ -58,7 +55,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
           ))}
         </div>
 
-        {/* Menu Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredItems.map((item, index) => (
             <div 
@@ -66,7 +62,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
               className="group flex flex-col glass-effect rounded-3xl overflow-hidden border border-white/5 hover:border-amber-500/30 smooth-transition hover:scale-105"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              {/* Image Container */}
               <div className="relative h-64 overflow-hidden">
                 <img 
                   src={item.image} 
@@ -75,7 +70,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                 
-                {/* Badges */}
                 <div className="absolute top-4 left-4 flex gap-2">
                   {item.spicy && (
                     <span className="glass-effect px-3 py-2 rounded-full flex items-center gap-1.5 border border-red-500/30">
@@ -91,7 +85,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
                   )}
                 </div>
 
-                {/* Price Badge */}
                 <div className="absolute bottom-4 right-4 glass-effect px-4 py-2 rounded-full border border-amber-500/30">
                   <span className="text-amber-500 font-bold text-lg">
                     R$ {item.price.toFixed(2)}
@@ -99,7 +92,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
                 </div>
               </div>
 
-              {/* Content */}
               <div className="p-6 flex flex-col flex-grow">
                 <h4 className="text-xl font-bold text-white mb-2 group-hover:text-amber-500 smooth-transition">
                   {item.name}
@@ -108,7 +100,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
                   {item.description}
                 </p>
                 
-                {/* Add to Cart Button */}
                 <button 
                   onClick={() => onAddToCart(item)}
                   className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black py-3 rounded-full font-semibold text-sm uppercase tracking-wider smooth-transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
@@ -116,65 +107,6 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
                   <ShoppingCart size={16} />
                   Adicionar ao Carrinho
                 </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default MenuSection;
-              <div className="relative h-64 md:h-72 overflow-hidden">
-                <img 
-                  src={item.image} 
-                  alt={item.name}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-                
-                <div className="absolute top-5 left-5 flex gap-2">
-                  {item.spicy && (
-                    <span className="bg-red-600/90 backdrop-blur-md text-white p-2 rounded-xl">
-                      <Flame size={14} />
-                    </span>
-                  )}
-                  {item.vegetarian && (
-                    <span className="bg-green-600/90 backdrop-blur-md text-white p-2 rounded-xl">
-                      <Leaf size={14} />
-                    </span>
-                  )}
-                </div>
-
-                <div className="absolute bottom-5 left-5 right-5 flex justify-between items-center md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300">
-                    <span className="md:hidden text-white font-bold font-serif text-lg">R$ {item.price.toFixed(2)}</span>
-                    <button 
-                        onClick={() => onAddToCart(item)}
-                        className="bg-amber-500 text-black h-12 px-6 rounded-2xl font-bold flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-xl shadow-amber-500/20"
-                    >
-                        <Plus size={18} />
-                        <span className="text-[10px] tracking-widest uppercase">Add</span>
-                    </button>
-                </div>
-              </div>
-
-              <div className="p-6 md:p-8 flex flex-col flex-grow">
-                <div className="flex justify-between items-start mb-3">
-                  <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight leading-none group-hover:text-amber-500 transition-colors">
-                    {item.name}
-                  </h4>
-                </div>
-                <p className="text-gray-500 text-xs md:text-sm leading-relaxed mb-6 flex-grow line-clamp-2 md:line-clamp-3">
-                  {item.description}
-                </p>
-                <div className="hidden md:flex items-center justify-between border-t border-white/5 pt-6 mt-auto">
-                  <span className="text-2xl font-bold text-white font-serif">
-                    <span className="text-[10px] text-amber-500 mr-1 uppercase font-sans tracking-[0.2em]">R$</span>
-                    {item.price.toFixed(2)}
-                  </span>
-                  <ArrowRight size={16} className="text-gray-600 group-hover:text-amber-500 transition-colors" />
-                </div>
               </div>
             </div>
           ))}

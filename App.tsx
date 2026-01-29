@@ -150,31 +150,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App; 
-              </p>
-              <p className="text-gray-400 text-lg leading-relaxed mb-10">
-                Cada detalhe, da escolha do sal de flor à maturação da carne, é pensado para que cada mordida conte uma história de dedicação e sabor.
-              </p>
-              <button className="group flex items-center gap-4 text-white font-bold uppercase tracking-widest text-sm">
-                Conheça Nossa História
-                <div className="w-12 h-px bg-amber-500 group-hover:w-24 transition-all duration-500"></div>
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-
-      <CartModal 
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemove={handleRemoveFromCart}
-      />
-    </div>
-  );
-};
-
 export default App;
