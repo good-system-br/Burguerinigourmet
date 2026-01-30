@@ -142,7 +142,7 @@ const Hero: React.FC = () => {
           <div className="text-left space-y-8 animate-on-scroll">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/30 to-orange-600/30 backdrop-blur-sm border border-amber-500/50 rounded-full px-4 py-2">
               <Award className="text-amber-400" size={18} />
-              <span className="text-amber-400 text-sm font-semibold">Prêmio Melhor Hambúrguer 2024</span>
+              <span className="text-amber-400 text-sm font-semibold">Prêmio Melhor Hambúrguer 2022</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">

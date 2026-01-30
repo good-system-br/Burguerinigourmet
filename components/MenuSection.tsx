@@ -87,7 +87,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
 
                 <div className="absolute bottom-4 right-4 glass-effect px-4 py-2 rounded-full border border-amber-500/30">
                   <span className="text-amber-500 font-bold text-lg">
-                    R$ {item.price.toFixed(2)}
+                    Consulte
                   </span>
                 </div>
               </div>

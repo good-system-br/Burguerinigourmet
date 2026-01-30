@@ -33,8 +33,6 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
             <Link to="/" className="nav-link">Início</Link>
             <Link to="/cardapio" className="nav-link">Cardápio</Link>
             <Link to="/galeria" className="nav-link">Galeria</Link>
-            <Link to="/videos" className="nav-link">Vídeos</Link>
-            <Link to="/processo" className="nav-link">Processo</Link>
             <Link to="/sobre" className="nav-link">Sobre</Link>
             <Link to="/contato" className="nav-link">Contato</Link>
           </div>
@@ -77,12 +75,6 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
         </Link>
         <Link to="/galeria" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Galeria
-        </Link>
-        <Link to="/videos" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
-          Vídeos
-        </Link>
-        <Link to="/processo" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
-          Processo
         </Link>
         <Link to="/sobre" onClick={closeMenu} className="text-white text-2xl font-semibold hover:text-amber-400 transition-colors duration-300">
           Sobre

@@ -51,11 +51,7 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#benefits" className="hover:text-amber-500 smooth-transition hover:translate-x-1 inline-block">
-                  Diferenciais
-                </a>
-              </li>
-              <li>
+
                 <a href="#about" className="hover:text-amber-500 smooth-transition hover:translate-x-1 inline-block">
                   Nossa História
                 </a>
@@ -79,7 +75,7 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-xs text-center md:text-left">
-            © 2024 <span className="text-amber-500 font-semibold">{APP_CONFIG.restaurantName}</span>. Todos os direitos reservados.
+            © 2022 <span className="text-amber-500 font-semibold">{APP_CONFIG.restaurantName}</span>. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-6 text-xs text-gray-500">
             <a href="#" className="hover:text-amber-500 smooth-transition">Política de Privacidade</a>

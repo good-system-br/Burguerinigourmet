@@ -7,8 +7,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import MenuPage from './pages/MenuPage';
 import GalleryPage from './pages/GalleryPage';
-import VideosPage from './pages/VideosPage';
-import ProcessPage from './pages/ProcessPage';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 import { MenuItem, CartItem } from './types';
@@ -50,8 +48,6 @@ const App: React.FC = () => {
           <Route path="/" element={<Home onCartClick={() => setIsCartOpen(true)} cartItems={cartItems.length} />} />
           <Route path="/cardapio" element={<MenuPage onAddToCart={handleAddToCart} />} />
           <Route path="/galeria" element={<GalleryPage />} />
-          <Route path="/videos" element={<VideosPage />} />
-          <Route path="/processo" element={<ProcessPage />} />
           <Route path="/sobre" element={<AboutPage />} />
           <Route path="/contato" element={<ContactPage />} />
         </Routes>

@@ -134,7 +134,7 @@ const FeaturedCarousel: React.FC = () => {
                   {/* Preço */}
                   <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-500/30">
                     <span className="text-amber-500 font-bold text-lg">
-                      R$ {item.price.toFixed(2)}
+                      Consulte
                     </span>
                   </div>
                 </div>

@@ -23,11 +23,10 @@ const CartModal: React.FC<CartModalProps> = ({
 
   const handleCheckout = () => {
     const message = items
-      .map((item) => `${item.quantity}x ${item.name} - R$ ${(item.price * item.quantity).toFixed(2)}`)
+      .map((item) => `${item.quantity}x ${item.name}`)
       .join('\n');
-    const totalMessage = `\n\nTotal: R$ ${total.toFixed(2)}`;
     const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(
-      `Olá! Gostaria de fazer o seguinte pedido:\n\n${message}${totalMessage}`
+      `Olá! Gostaria de fazer o seguinte pedido:\n\n${message}`
     )}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -114,7 +113,7 @@ const CartModal: React.FC<CartModalProps> = ({
           <div className="p-6 md:p-8 border-t border-white/5 bg-black/40">
             <div className="flex items-center justify-between mb-6">
               <span className="text-gray-400 text-lg md:text-xl">Total:</span>
-              <span className="text-3xl md:text-4xl font-bold gradient-text">R$ {total.toFixed(2)}</span>
+              <span className="text-3xl md:text-4xl font-bold gradient-text">Consulte conosco</span>
             </div>
             <button
               onClick={handleCheckout}
