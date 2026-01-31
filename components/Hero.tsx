@@ -71,10 +71,26 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
   };
 
   const scrollToMenu = () => {
-    const menuSection = document.getElementById('menu');
-    if (menuSection) {
-      menuSection.scrollIntoView({ behavior: 'smooth' });
+    // Tenta encontrar a seção do menu de várias formas
+    let targetElement = document.getElementById('menu');
+    
+    if (!targetElement) {
+      // Se não encontrar, tenta encontrar por query selector
+      targetElement = document.querySelector('section[id="menu"]') || 
+                     document.querySelector('[class*="MenuSection"]');
     }
+    
+    if (!targetElement) {
+      // Se ainda não encontrar, rola para 800px de distância
+      window.scrollBy({ top: 800, behavior: 'smooth' });
+      return;
+    }
+    
+    // Calcula posição com offset para navbar fixa
+    const offset = 80;
+    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+    
+    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
   };
 
   return (
@@ -186,7 +202,15 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
                 Ver Cardápio
               </button>
               <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  const contactElement = document.getElementById('contact') || 
+                                       document.querySelector('section[id="contact"]');
+                  if (contactElement) {
+                    const offset = 80;
+                    const elementPosition = contactElement.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                  }
+                }}
                 className="glass-effect border border-white/30 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-full font-bold text-sm md:text-lg hover:bg-white/20 transition-all duration-300 active:scale-95 min-h-[44px]"
               >
                 Fale Conosco
