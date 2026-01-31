@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Star, Flame } from 'lucide-react';
+import { Star, Flame } from 'lucide-react';
 import { MENU_ITEMS } from '../constants';
 
 const FeaturedCarousel: React.FC = () => {
@@ -71,27 +71,12 @@ const FeaturedCarousel: React.FC = () => {
   return (
     <section className="py-12 md:py-16 bg-gradient-to-b from-black to-zinc-950 overflow-hidden md:hidden">
       <div className="px-4">
-        <div className="flex items-center justify-between mb-6">
+        <div className="mb-6">
           <div>
             <h2 className="text-2xl font-bold text-white mb-1">
               <span className="gradient-text">Destaques</span>
             </h2>
             <p className="text-gray-400 text-sm">Os mais pedidos</p>
-          </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => scroll('left')}
-              className="glass-effect border border-white/10 p-2 rounded-full text-white active:scale-95 transition-all"
-              disabled={scrollPosition === 0}
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              className="glass-effect border border-white/10 p-2 rounded-full text-white active:scale-95 transition-all"
-            >
-              <ChevronRight size={18} />
-            </button>
           </div>
         </div>
 
