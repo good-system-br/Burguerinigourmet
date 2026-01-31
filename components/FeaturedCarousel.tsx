@@ -47,15 +47,6 @@ const FeaturedCarousel: React.FC = () => {
     };
   }, [featuredItems.length]);
 
-  const scroll = (direction: 'left' | 'right') => {
-    const nextIndex = direction === 'left'
-      ? Math.max(0, currentIndex - 1)
-      : Math.min(featuredItems.length - 1, currentIndex + 1);
-    
-    scrollToIndex(nextIndex);
-    resetAutoPlay();
-  };
-
   const handleScroll = () => {
     if (scrollContainerRef.current) {
       const newPosition = scrollContainerRef.current.scrollLeft;

@@ -6,8 +6,8 @@ interface CartModalProps {
   isOpen: boolean;
   onClose: () => void;
   items: CartItem[];
-  onUpdateQuantity: (id: number, quantity: number) => void;
-  onRemoveItem: (id: number) => void;
+  onUpdateQuantity: (id: string, delta: number) => void;
+  onRemove: (id: string) => void;
 }
 
 const CartModal: React.FC<CartModalProps> = ({
@@ -15,7 +15,7 @@ const CartModal: React.FC<CartModalProps> = ({
   onClose,
   items,
   onUpdateQuantity,
-  onRemoveItem,
+  onRemove,
 }) => {
   if (!isOpen) return null;
 
@@ -25,7 +25,7 @@ const CartModal: React.FC<CartModalProps> = ({
     const message = items
       .map((item) => `${item.quantity}x ${item.name}`)
       .join('\n');
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/553598472-5145?text=${encodeURIComponent(
       `Olá! Gostaria de fazer o seguinte pedido:\n\n${message}`
     )}`;
     window.open(whatsappUrl, '_blank');
@@ -79,7 +79,7 @@ const CartModal: React.FC<CartModalProps> = ({
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 md:gap-3 bg-black/40 rounded-xl p-1.5 md:p-2">
                           <button
-                            onClick={() => onUpdateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                            onClick={() => onUpdateQuantity(item.id, -1)}
                             className="p-1.5 md:p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300"
                           >
                             <Minus size={16} className="text-white" />
@@ -88,14 +88,14 @@ const CartModal: React.FC<CartModalProps> = ({
                             {item.quantity}
                           </span>
                           <button
-                            onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                            onClick={() => onUpdateQuantity(item.id, 1)}
                             className="p-1.5 md:p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300"
                           >
                             <Plus size={16} className="text-white" />
                           </button>
                         </div>
                         <button
-                          onClick={() => onRemoveItem(item.id)}
+                          onClick={() => onRemove(item.id)}
                           className="p-2 md:p-2.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 transition-colors duration-300"
                         >
                           <Trash2 size={18} className="text-red-400" />

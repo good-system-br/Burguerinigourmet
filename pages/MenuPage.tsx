@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuSection from '../components/MenuSection';
-import { MenuItem, CartItem } from '../types';
+import { MenuItem } from '../types';
 
 interface MenuProps {
   onAddToCart: (item: MenuItem) => void;

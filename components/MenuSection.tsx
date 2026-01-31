@@ -43,7 +43,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
           {categories.map(cat => (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(cat.id as any)}
+              onClick={() => setActiveCategory(cat.id as 'all' | 'burgers' | 'sides' | 'drinks' | 'desserts')}
               className={`flex-shrink-0 px-6 md:px-8 py-3 rounded-full border text-xs font-semibold uppercase tracking-wider smooth-transition ${
                 activeCategory === cat.id 
                   ? 'bg-gradient-to-r from-amber-500 to-amber-600 border-amber-500 text-black shadow-lg shadow-amber-500/30' 

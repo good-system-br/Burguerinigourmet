@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Award, Clock, Heart } from 'lucide-react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onCartClick?: () => void;
+  cartItems?: number;
+}
+
+const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
