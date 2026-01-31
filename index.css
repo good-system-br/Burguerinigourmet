@@ -11,6 +11,13 @@ body {
   color: #ffffff;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
+  /* Safe area insets for notched devices */
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
+  /* Prevent horizontal scroll */
+  width: 100%;
+  max-width: 100%;
+  position: relative;
 }
 
 h1, h2, h3, h4, h5, h6, .font-serif {
@@ -27,8 +34,42 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 
 .glass-effect {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@media (max-width: 768px) {
+  .glass-effect {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Prevent layout shift on mobile */
+  * {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  input, textarea, select {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Prevent unwanted zoom on input focus */
+  input, textarea, select, button {
+    font-size: 16px !important;
+  }
+
+  /* Disable double-tap zoom (already prevented by viewport-fit=cover) */
+  html, body {
+    touch-action: manipulation;
+  }
+
+  /* Fix container overflow issues */
+  [class*="container"], [class*="mx-auto"], section {
+    overflow-x: hidden;
+  }
 }
 
 .animate-on-scroll {

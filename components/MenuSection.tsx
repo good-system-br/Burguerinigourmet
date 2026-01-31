@@ -44,7 +44,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id as 'all' | 'burgers' | 'sides' | 'drinks' | 'desserts')}
-              className={`flex-shrink-0 px-6 md:px-8 py-3 rounded-full border text-xs font-semibold uppercase tracking-wider smooth-transition ${
+              className={`flex-shrink-0 px-6 md:px-8 py-3 md:py-3 rounded-full border text-xs font-semibold uppercase tracking-wider smooth-transition min-h-[44px] flex items-center justify-center ${
                 activeCategory === cat.id 
                   ? 'bg-gradient-to-r from-amber-500 to-amber-600 border-amber-500 text-black shadow-lg shadow-amber-500/30' 
                   : 'glass-effect border-white/10 text-gray-400 hover:border-amber-500/50 hover:text-white'
@@ -67,6 +67,8 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
                   src={item.image} 
                   alt={item.name}
                   className="w-full h-full object-cover smooth-transition group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                 

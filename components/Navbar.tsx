@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
           <div className="flex items-center space-x-4">
             <button
               onClick={onCartClick}
-              className="relative p-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="relative md:p-3 p-3.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[48px] min-w-[48px] md:min-h-[44px] md:min-w-[44px] flex items-center justify-center"
             >
               <ShoppingCart size={20} />
               {cartItems > 0 && (
@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartItems, onCartClick }) => {
 
             <button
               onClick={toggleMenu}
-              className="md:hidden p-3 rounded-full glass-effect border border-white/20 text-white hover:bg-white/10 transition-all duration-300"
+              className="md:hidden md:p-3 p-3.5 rounded-full glass-effect border border-white/20 text-white hover:bg-white/10 transition-all duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>

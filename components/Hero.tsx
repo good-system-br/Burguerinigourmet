@@ -101,6 +101,7 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
                 alt={`Hambúrguer Gourmet ${index + 1}`}
                 className="w-full h-full object-cover pointer-events-none"
                 draggable="false"
+                loading={index === currentSlide ? "eager" : "lazy"}
               />
               <div className="absolute inset-0 bg-black/60"></div>
             </div>
@@ -110,13 +111,13 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
         {/* Setas de navegação - Background */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 glass-effect border border-white/30 p-3 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg"
+          className="absolute left-4 top-1/2 -translate-y-1/2 glass-effect border border-white/30 md:p-3 p-4 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg min-h-[48px] min-w-[48px] md:min-h-[44px] md:min-w-[44px] flex items-center justify-center"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 glass-effect border border-white/30 p-3 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg"
+          className="absolute right-4 top-1/2 -translate-y-1/2 glass-effect border border-white/30 md:p-3 p-4 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg min-h-[48px] min-w-[48px] md:min-h-[44px] md:min-w-[44px] flex items-center justify-center"
         >
           <ChevronRight size={24} />
         </button>

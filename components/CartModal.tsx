@@ -38,10 +38,10 @@ const CartModal: React.FC<CartModalProps> = ({
         onClick={onClose}
       ></div>
 
-      <div className="relative w-full md:w-[600px] max-h-[85vh] md:max-h-[80vh] bg-gradient-to-br from-gray-900 via-black to-gray-900 border border-white/10 md:rounded-3xl rounded-t-3xl shadow-2xl animate-slide-up md:animate-on-scroll overflow-hidden flex flex-col">
+      <div className="relative w-full md:w-[600px] max-h-[85vh] md:max-h-[80vh] bg-gradient-to-br from-gray-900 via-black to-gray-900 border border-white/10 md:rounded-3xl rounded-t-3xl shadow-2xl animate-slide-up md:animate-on-scroll overflow-hidden flex flex-col safe-area-inset">
         <div className="w-12 h-1 bg-white/10 rounded-full mx-auto mt-4 mb-2 md:hidden"></div>
 
-        <div className="p-6 md:p-8 border-b border-white/5 flex items-center justify-between">
+        <div className="p-6 md:p-8 border-b border-white/5 flex items-center justify-between pt-[env(safe-area-inset-top)]">
           <div className="flex items-center gap-3">
             <ShoppingBag className="text-amber-500 w-5 h-5 md:w-6 md:h-6" />
             <h2 className="text-2xl md:text-3xl font-bold text-white">Seu Pedido</h2>
@@ -72,6 +72,8 @@ const CartModal: React.FC<CartModalProps> = ({
                       src={item.image}
                       alt={item.name}
                       className="w-20 h-20 md:w-24 md:h-24 object-cover rounded-xl ring-2 ring-white/10"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="flex-1 min-w-0">
                       <h3 className="font-bold text-white text-base md:text-lg mb-1 truncate">{item.name}</h3>
@@ -80,7 +82,7 @@ const CartModal: React.FC<CartModalProps> = ({
                         <div className="flex items-center gap-2 md:gap-3 bg-black/40 rounded-xl p-1.5 md:p-2">
                           <button
                             onClick={() => onUpdateQuantity(item.id, -1)}
-                            className="p-1.5 md:p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300"
+                            className="p-2.5 md:p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
                           >
                             <Minus size={16} className="text-white" />
                           </button>
@@ -89,14 +91,14 @@ const CartModal: React.FC<CartModalProps> = ({
                           </span>
                           <button
                             onClick={() => onUpdateQuantity(item.id, 1)}
-                            className="p-1.5 md:p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300"
+                            className="p-2.5 md:p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
                           >
                             <Plus size={16} className="text-white" />
                           </button>
                         </div>
                         <button
                           onClick={() => onRemove(item.id)}
-                          className="p-2 md:p-2.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 transition-colors duration-300"
+                          className="p-2.5 md:p-2.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 transition-colors duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
                         >
                           <Trash2 size={18} className="text-red-400" />
                         </button>
@@ -110,14 +112,14 @@ const CartModal: React.FC<CartModalProps> = ({
         </div>
 
         {items.length > 0 && (
-          <div className="p-6 md:p-8 border-t border-white/5 bg-black/40">
+          <div className="p-6 md:p-8 border-t border-white/5 bg-black/40 pb-[calc(env(safe-area-inset-bottom)_+_1.5rem)]">
             <div className="flex items-center justify-between mb-6">
               <span className="text-gray-400 text-lg md:text-xl">Total:</span>
               <span className="text-3xl md:text-4xl font-bold gradient-text">Consulte conosco</span>
             </div>
             <button
               onClick={handleCheckout}
-              className="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white py-4 md:py-5 rounded-2xl font-bold text-lg md:text-xl hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 transform hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white py-4 md:py-5 rounded-2xl font-bold text-lg md:text-xl hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 transform hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
             >
               Finalizar Pedido
             </button>
