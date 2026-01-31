@@ -143,51 +143,51 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
       </div>
 
       {/* Conteúdo Textual - Frente */}
-      <div className="container mx-auto px-4 lg:px-8 relative z-20">
+      <div className="container mx-auto px-4 md:px-8 relative z-20">
         <div className="max-w-2xl">
-          <div className="text-left space-y-8 animate-on-scroll">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/30 to-orange-600/30 backdrop-blur-sm border border-amber-500/50 rounded-full px-4 py-2">
-              <Award className="text-amber-400" size={18} />
-              <span className="text-amber-400 text-sm font-semibold">Prêmio Melhor Hambúrguer 2022</span>
+          <div className="text-left space-y-4 md:space-y-8 animate-on-scroll">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/30 to-orange-600/30 backdrop-blur-sm border border-amber-500/50 rounded-full px-3 md:px-4 py-1.5 md:py-2">
+              <Award className="text-amber-400 flex-shrink-0" size={16} />
+              <span className="text-amber-400 text-xs md:text-sm font-semibold">Prêmio Melhor Hambúrguer 2022</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+            <h1 className="text-3xl md:text-7xl font-bold leading-tight">
               <span className="gradient-text">Sabor Incomparável</span>
               <br />
               <span className="text-white">em Cada Mordida</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-100 leading-relaxed">
+            <p className="text-base md:text-xl text-gray-100 leading-relaxed">
               Ingredientes premium, receitas exclusivas e o toque artesanal que fazem do Burguerini Gourmet uma experiência gastronômica única.
             </p>
 
-            <div className="flex flex-wrap gap-4 md:gap-6">
-              <div className="flex items-center gap-3 bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4">
-                <Clock className="text-amber-400" size={24} />
+            <div className="flex flex-col gap-3 md:gap-6">
+              <div className="flex items-center gap-2 md:gap-3 bg-black/60 backdrop-blur-sm border border-white/20 rounded-xl md:rounded-2xl px-4 md:px-6 py-3">
+                <Clock className="text-amber-400 flex-shrink-0" size={20} />
                 <div>
-                  <p className="text-white font-bold text-lg">30min</p>
-                  <p className="text-gray-300 text-sm">Entrega rápida</p>
+                  <p className="text-white font-bold text-base md:text-lg">30min</p>
+                  <p className="text-gray-300 text-xs md:text-sm">Entrega rápida</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4">
-                <Heart className="text-red-400" size={24} />
+              <div className="flex items-center gap-2 md:gap-3 bg-black/60 backdrop-blur-sm border border-white/20 rounded-xl md:rounded-2xl px-4 md:px-6 py-3">
+                <Heart className="text-red-400 flex-shrink-0" size={20} />
                 <div>
-                  <p className="text-white font-bold text-lg">4.9/5.0</p>
-                  <p className="text-gray-300 text-sm">Avaliação</p>
+                  <p className="text-white font-bold text-base md:text-lg">4.9/5.0</p>
+                  <p className="text-gray-300 text-xs md:text-sm">Avaliação</p>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
               <button
                 onClick={scrollToMenu}
-                className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-amber-500/40 transform hover:scale-105 active:scale-95"
+                className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-full font-bold text-sm md:text-lg hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-amber-500/40 transform active:scale-95 min-h-[44px]"
               >
                 Ver Cardápio
               </button>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="glass-effect border border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300 active:scale-95"
+                className="glass-effect border border-white/30 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-full font-bold text-sm md:text-lg hover:bg-white/20 transition-all duration-300 active:scale-95 min-h-[44px]"
               >
                 Fale Conosco
               </button>

@@ -55,14 +55,14 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {filteredItems.map((item, index) => (
             <div 
               key={item.id} 
-              className="group flex flex-col glass-effect rounded-3xl overflow-hidden border border-white/5 hover:border-amber-500/30 smooth-transition hover:scale-105"
+              className="group flex flex-col glass-effect rounded-xl md:rounded-3xl overflow-hidden border border-white/5 hover:border-amber-500/30 smooth-transition hover:scale-105 active:scale-100"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-40 md:h-64 overflow-hidden">
                 <img 
                   src={item.image} 
                   alt={item.name}
@@ -72,42 +72,42 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                 
-                <div className="absolute top-4 left-4 flex gap-2">
+                <div className="absolute top-2 md:top-4 left-2 md:left-4 flex gap-1 md:gap-2">
                   {item.spicy && (
-                    <span className="glass-effect px-3 py-2 rounded-full flex items-center gap-1.5 border border-red-500/30">
-                      <Flame size={14} className="text-red-500" />
-                      <span className="text-white text-[10px] font-semibold uppercase tracking-wider">Picante</span>
+                    <span className="glass-effect px-2 md:px-3 py-1 md:py-2 rounded-full flex items-center gap-1 border border-red-500/30">
+                      <Flame size={12} className="text-red-500 md:w-4 md:h-4" />
+                      <span className="text-white text-[8px] md:text-[10px] font-semibold uppercase tracking-wider">Picante</span>
                     </span>
                   )}
                   {item.vegetarian && (
-                    <span className="glass-effect px-3 py-2 rounded-full flex items-center gap-1.5 border border-green-500/30">
-                      <Leaf size={14} className="text-green-500" />
-                      <span className="text-white text-[10px] font-semibold uppercase tracking-wider">Vegano</span>
+                    <span className="glass-effect px-2 md:px-3 py-1 md:py-2 rounded-full flex items-center gap-1 border border-green-500/30">
+                      <Leaf size={12} className="text-green-500 md:w-4 md:h-4" />
+                      <span className="text-white text-[8px] md:text-[10px] font-semibold uppercase tracking-wider">Vegano</span>
                     </span>
                   )}
                 </div>
 
-                <div className="absolute bottom-4 right-4 glass-effect px-4 py-2 rounded-full border border-amber-500/50 bg-black/60">
-                  <span className="text-amber-400 font-bold text-xl">
+                <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 glass-effect px-2 md:px-4 py-1 md:py-2 rounded-full border border-amber-500/50 bg-black/60">
+                  <span className="text-amber-400 font-bold text-sm md:text-xl">
                     R$ {item.price.toFixed(2).replace('.', ',')}
                   </span>
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col flex-grow">
-                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-amber-500 smooth-transition">
+              <div className="p-3 md:p-6 flex flex-col flex-grow">
+                <h4 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2 group-hover:text-amber-500 smooth-transition line-clamp-1 md:line-clamp-2">
                   {item.name}
                 </h4>
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-3 md:mb-6 flex-grow line-clamp-2 md:line-clamp-3">
                   {item.description}
                 </p>
                 
                 <button 
                   onClick={() => onAddToCart(item)}
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black py-3 rounded-full font-semibold text-sm uppercase tracking-wider smooth-transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
+                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black py-2 md:py-3 px-3 md:px-4 rounded-lg md:rounded-full font-semibold text-xs md:text-sm uppercase tracking-wider smooth-transition flex items-center justify-center gap-1 md:gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 active:scale-95 min-h-[40px] md:min-h-[44px]"
                 >
-                  <ShoppingCart size={16} />
-                  Adicionar ao Carrinho
+                  <ShoppingCart size={14} className="md:w-4 md:h-4" />
+                  <span>Adicionar</span>
                 </button>
               </div>
             </div>
