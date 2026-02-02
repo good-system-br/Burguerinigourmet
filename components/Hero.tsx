@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Award, Clock, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Award, Clock, Heart, ArrowRight, Star } from 'lucide-react';
 
 interface HeroProps {
   onCartClick?: () => void;
@@ -20,7 +20,7 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
     }
     autoPlayRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
   };
 
   useEffect(() => {
@@ -71,22 +71,18 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
   };
 
   const scrollToMenu = () => {
-    // Tenta encontrar a seção do menu de várias formas
     let targetElement = document.getElementById('menu');
     
     if (!targetElement) {
-      // Se não encontrar, tenta encontrar por query selector
       targetElement = document.querySelector('section[id="menu"]') || 
                      document.querySelector('[class*="MenuSection"]');
     }
     
     if (!targetElement) {
-      // Se ainda não encontrar, rola para 800px de distância
       window.scrollBy({ top: 800, behavior: 'smooth' });
       return;
     }
     
-    // Calcula posição com offset para navbar fixa
     const offset = 80;
     const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
     
@@ -94,8 +90,8 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      {/* Carrossel de Fundo */}
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-neutral-950">
+      {/* Background Carousel */}
       <div 
         className="absolute inset-0 z-0"
         onTouchStart={handleTouchStart}
@@ -106,7 +102,7 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-all duration-1000 ease-out ${
+              className={`absolute inset-0 transition-all duration-[1200ms] ease-out ${
                 index === currentSlide 
                   ? 'opacity-100 scale-100' 
                   : 'opacity-0 scale-105'
@@ -119,27 +115,15 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
                 draggable="false"
                 loading={index === currentSlide ? "eager" : "lazy"}
               />
-              <div className="absolute inset-0 bg-black/60"></div>
+              {/* Modern Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/60"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
             </div>
           ))}
         </div>
 
-        {/* Setas de navegação - Background */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 glass-effect border border-white/30 md:p-3 p-4 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg min-h-[48px] min-w-[48px] md:min-h-[44px] md:min-w-[44px] flex items-center justify-center"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 glass-effect border border-white/30 md:p-3 p-4 rounded-full text-white hover:bg-white/20 active:scale-95 transition-all duration-300 z-10 shadow-lg min-h-[48px] min-w-[48px] md:min-h-[44px] md:min-w-[44px] flex items-center justify-center"
-        >
-          <ChevronRight size={24} />
-        </button>
-
-        {/* Indicadores - Background */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        {/* Slide Indicators - Modern Design */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -147,60 +131,95 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
                 setCurrentSlide(index);
                 resetAutoPlay();
               }}
-              className={`rounded-full transition-all duration-300 ${
+              className={`group relative transition-all duration-500 ${
                 index === currentSlide 
-                  ? 'w-8 h-2 bg-amber-500 shadow-lg shadow-amber-500/50' 
-                  : 'w-2 h-2 bg-white/40 hover:bg-white/60'
+                  ? 'w-12 h-3' 
+                  : 'w-3 h-3 hover:w-6'
               }`}
               aria-label={`Ir para slide ${index + 1}`}
-            />
+            >
+              <div className={`absolute inset-0 rounded-full transition-all duration-500 ${
+                index === currentSlide 
+                  ? 'bg-primary-500 shadow-glow' 
+                  : 'bg-white/40 group-hover:bg-white/70'
+              }`}></div>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* Conteúdo Textual - Frente */}
-      <div className="container mx-auto px-4 md:px-8 relative z-20">
-        <div className="max-w-2xl">
-          <div className="text-left space-y-4 md:space-y-8 animate-on-scroll">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/30 to-orange-600/30 backdrop-blur-sm border border-amber-500/50 rounded-full px-3 md:px-4 py-1.5 md:py-2">
-              <Award className="text-amber-400 flex-shrink-0" size={16} />
-              <span className="text-amber-400 text-xs md:text-sm font-semibold">Prêmio Melhor Hambúrguer 2022</span>
+      {/* Hero Content - Modern Layout */}
+      <div className="container mx-auto px-4 md:px-8 relative z-20 py-20">
+        <div className="max-w-4xl">
+          <div className="space-y-8 animate-fade-in-up">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-3 glass-effect-strong border border-primary-500/30 rounded-2xl px-5 py-3 backdrop-blur-xl">
+              <div className="relative">
+                <Award className="text-primary-500 relative z-10" size={20} />
+                <div className="absolute inset-0 bg-primary-500/30 blur-lg"></div>
+              </div>
+              <span className="text-primary-400 text-sm md:text-base font-semibold">
+                Prêmio Melhor Hambúrguer 2022
+              </span>
             </div>
 
-            <h1 className="text-3xl md:text-7xl font-bold leading-tight">
-              <span className="gradient-text">Sabor Incomparável</span>
-              <br />
-              <span className="text-white">em Cada Mordida</span>
+            {/* Main Heading */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight">
+              <span className="block gradient-text mb-2">
+                Sabor Incomparável
+              </span>
+              <span className="block text-white">
+                em Cada <span className="text-primary-500">Mordida</span>
+              </span>
             </h1>
 
-            <p className="text-base md:text-xl text-gray-100 leading-relaxed">
-              Ingredientes premium, receitas exclusivas e o toque artesanal que fazem do Burguerini Gourmet uma experiência gastronômica única.
+            {/* Description */}
+            <p className="text-lg md:text-xl lg:text-2xl text-neutral-300 leading-relaxed max-w-2xl">
+              Ingredientes premium, receitas exclusivas e o toque artesanal que fazem do 
+              <span className="text-white font-semibold"> Burguerini Gourmet </span>
+              uma experiência gastronômica única.
             </p>
 
-            <div className="flex flex-col gap-3 md:gap-6">
-              <div className="flex items-center gap-2 md:gap-3 bg-black/60 backdrop-blur-sm border border-white/20 rounded-xl md:rounded-2xl px-4 md:px-6 py-3">
-                <Clock className="text-amber-400 flex-shrink-0" size={20} />
-                <div>
-                  <p className="text-white font-bold text-base md:text-lg">30min</p>
-                  <p className="text-gray-300 text-xs md:text-sm">Entrega rápida</p>
+            {/* Stats Cards */}
+            <div className="grid grid-cols-2 gap-4 max-w-xl">
+              <div className="group relative glass-effect-strong hover:glass-effect border border-white/10 hover:border-primary-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-105">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10 flex items-center gap-4">
+                  <div className="p-3 bg-primary-500/20 rounded-xl">
+                    <Clock className="text-primary-400" size={24} />
+                  </div>
+                  <div>
+                    <p className="text-2xl md:text-3xl font-bold text-white">30min</p>
+                    <p className="text-sm text-neutral-400">Entrega rápida</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-center gap-2 md:gap-3 bg-black/60 backdrop-blur-sm border border-white/20 rounded-xl md:rounded-2xl px-4 md:px-6 py-3">
-                <Heart className="text-red-400 flex-shrink-0" size={20} />
-                <div>
-                  <p className="text-white font-bold text-base md:text-lg">4.9/5.0</p>
-                  <p className="text-gray-300 text-xs md:text-sm">Avaliação</p>
+
+              <div className="group relative glass-effect-strong hover:glass-effect border border-white/10 hover:border-primary-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-105">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10 flex items-center gap-4">
+                  <div className="p-3 bg-primary-500/20 rounded-xl">
+                    <Star className="text-primary-400" size={24} fill="currentColor" />
+                  </div>
+                  <div>
+                    <p className="text-2xl md:text-3xl font-bold text-white">4.9/5</p>
+                    <p className="text-sm text-neutral-400">Avaliação</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
                 onClick={scrollToMenu}
-                className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-full font-bold text-sm md:text-lg hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-amber-500/40 transform active:scale-95 min-h-[44px]"
+                className="group relative bg-gradient-to-r from-primary-500 to-primary-600 text-white px-8 py-5 rounded-2xl font-bold text-base md:text-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-glow hover:shadow-glow-lg transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3 overflow-hidden"
               >
-                Ver Cardápio
+                <span className="relative z-10">Ver Cardápio</span>
+                <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
               </button>
+              
               <button
                 onClick={() => {
                   const contactElement = document.getElementById('contact') || 
@@ -211,14 +230,19 @@ const Hero: React.FC<HeroProps> = ({ onCartClick, cartItems }) => {
                     window.scrollTo({ top: elementPosition, behavior: 'smooth' });
                   }
                 }}
-                className="glass-effect border border-white/30 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-full font-bold text-sm md:text-lg hover:bg-white/20 transition-all duration-300 active:scale-95 min-h-[44px]"
+                className="glass-effect-strong border border-white/20 hover:border-primary-500/50 text-white px-8 py-5 rounded-2xl font-bold text-base md:text-lg hover:bg-white/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-3"
               >
-                Fale Conosco
+                <span>Fale Conosco</span>
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-950 to-transparent z-10"></div>
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary-500/10 blur-[120px] rounded-full animate-float"></div>
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary-500/10 blur-[120px] rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
     </section>
   );
 };

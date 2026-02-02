@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MenuItem } from '../types';
 import { MENU_ITEMS } from '../constants';
-import { Plus, Flame, Leaf, ShoppingCart } from 'lucide-react';
+import { Plus, Flame, Leaf, ShoppingCart, Sparkles } from 'lucide-react';
 
 interface MenuSectionProps {
   onAddToCart: (item: MenuItem) => void;
@@ -9,110 +9,182 @@ interface MenuSectionProps {
 
 const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'burgers' | 'sides' | 'drinks' | 'desserts'>('all');
+  const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
 
   const filteredItems = activeCategory === 'all' 
     ? MENU_ITEMS 
     : MENU_ITEMS.filter(item => item.category === activeCategory);
 
   const categories = [
-    { id: 'all', label: 'Todos' },
-    { id: 'burgers', label: 'Burgers' },
-    { id: 'sides', label: 'Acompanhamentos' },
-    { id: 'drinks', label: 'Bebidas' },
-    { id: 'desserts', label: 'Sobremesas' },
+    { id: 'all', label: 'Todos', icon: Sparkles },
+    { id: 'burgers', label: 'Burgers', icon: null },
+    { id: 'sides', label: 'Acompanhamentos', icon: null },
+    { id: 'drinks', label: 'Bebidas', icon: null },
+    { id: 'desserts', label: 'Sobremesas', icon: null },
   ];
 
+  const handleAddToCart = (item: MenuItem) => {
+    onAddToCart(item);
+    setAddedItems(prev => new Set(prev).add(item.id));
+    setTimeout(() => {
+      setAddedItems(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(item.id);
+        return newSet;
+      });
+    }, 1500);
+  };
+
   return (
-    <section id="menu" className="relative py-24 md:py-32 bg-gradient-to-b from-zinc-950 via-black to-zinc-950 overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 blur-[120px] rounded-full"></div>
+    <section id="menu" className="relative py-24 md:py-32 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-500/5 blur-[120px] rounded-full animate-float"></div>
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-secondary-500/5 blur-[120px] rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-amber-500 text-xs md:text-sm uppercase tracking-[0.3em] font-semibold mb-4">
-            Seleção do Chef
-          </h2>
-          <h3 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20 space-y-6">
+          <div className="inline-flex items-center gap-2 glass-effect-strong border border-primary-500/20 rounded-full px-5 py-2">
+            <Sparkles className="text-primary-500" size={16} />
+            <span className="text-primary-500 text-xs md:text-sm uppercase tracking-[0.3em] font-semibold">
+              Seleção do Chef
+            </span>
+          </div>
+          
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Nosso <span className="gradient-text">Cardápio</span>
-          </h3>
-          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          </h2>
+          
+          <p className="text-neutral-400 text-base md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed">
             Cada item é preparado com ingredientes premium e muito amor pela gastronomia.
           </p>
         </div>
         
-        <div className="flex overflow-x-auto w-full no-scrollbar pb-4 mb-12 gap-3 justify-center">
-          {categories.map(cat => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id as 'all' | 'burgers' | 'sides' | 'drinks' | 'desserts')}
-              className={`flex-shrink-0 px-6 md:px-8 py-3 md:py-3 rounded-full border text-xs font-semibold uppercase tracking-wider smooth-transition min-h-[44px] flex items-center justify-center ${
-                activeCategory === cat.id 
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 border-amber-500 text-black shadow-lg shadow-amber-500/30' 
-                  : 'glass-effect border-white/10 text-gray-400 hover:border-amber-500/50 hover:text-white'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
+        {/* Category Filter - Modern Pills */}
+        <div className="flex overflow-x-auto scrollbar-hide gap-3 mb-12 md:mb-16 pb-4 md:justify-center">
+          {categories.map(cat => {
+            const Icon = cat.icon;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id as 'all' | 'burgers' | 'sides' | 'drinks' | 'desserts')}
+                className={`group relative flex-shrink-0 px-6 md:px-8 py-3.5 rounded-2xl border text-sm font-semibold uppercase tracking-wider smooth-transition min-h-[48px] flex items-center justify-center gap-2 overflow-hidden ${
+                  activeCategory === cat.id 
+                    ? 'bg-gradient-to-r from-primary-500 to-primary-600 border-primary-500 text-white shadow-glow' 
+                    : 'glass-effect border-white/10 text-neutral-400 hover:border-primary-500/30 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {Icon && <Icon size={16} />}
+                <span className="relative z-10">{cat.label}</span>
+                {activeCategory === cat.id && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        {/* Menu Grid - Modern Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
           {filteredItems.map((item, index) => (
             <div 
               key={item.id} 
-              className="group flex flex-col glass-effect rounded-xl md:rounded-3xl overflow-hidden border border-white/5 hover:border-amber-500/30 smooth-transition hover:scale-105 active:scale-100"
-              style={{ animationDelay: `${index * 50}ms` }}
+              className="group relative flex flex-col glass-effect rounded-3xl overflow-hidden border border-white/5 hover:border-primary-500/30 smooth-transition hover-lift"
+              style={{ 
+                animationDelay: `${index * 50}ms`,
+                opacity: 0,
+                animation: 'fadeInUp 0.6s ease-out forwards'
+              }}
             >
-              <div className="relative h-40 md:h-64 overflow-hidden">
+              {/* Image Container */}
+              <div className="relative h-56 md:h-64 overflow-hidden">
                 <img 
                   src={item.image} 
                   alt={item.name}
-                  className="w-full h-full object-cover smooth-transition group-hover:scale-110"
+                  className="w-full h-full object-cover smooth-transition-slow group-hover:scale-110"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
                 
-                <div className="absolute top-2 md:top-4 left-2 md:left-4 flex gap-1 md:gap-2">
+                {/* Tags */}
+                <div className="absolute top-3 left-3 flex flex-wrap gap-2">
                   {item.spicy && (
-                    <span className="glass-effect px-2 md:px-3 py-1 md:py-2 rounded-full flex items-center gap-1 border border-red-500/30">
-                      <Flame size={12} className="text-red-500 md:w-4 md:h-4" />
-                      <span className="text-white text-[8px] md:text-[10px] font-semibold uppercase tracking-wider">Picante</span>
+                    <span className="glass-effect-strong px-3 py-2 rounded-xl flex items-center gap-1.5 border border-red-500/30">
+                      <Flame size={14} className="text-red-500" />
+                      <span className="text-white text-[10px] font-semibold uppercase tracking-wider">Picante</span>
                     </span>
                   )}
                   {item.vegetarian && (
-                    <span className="glass-effect px-2 md:px-3 py-1 md:py-2 rounded-full flex items-center gap-1 border border-green-500/30">
-                      <Leaf size={12} className="text-green-500 md:w-4 md:h-4" />
-                      <span className="text-white text-[8px] md:text-[10px] font-semibold uppercase tracking-wider">Vegano</span>
+                    <span className="glass-effect-strong px-3 py-2 rounded-xl flex items-center gap-1.5 border border-green-500/30">
+                      <Leaf size={14} className="text-green-500" />
+                      <span className="text-white text-[10px] font-semibold uppercase tracking-wider">Vegano</span>
                     </span>
                   )}
                 </div>
 
-                <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 glass-effect px-2 md:px-4 py-1 md:py-2 rounded-full border border-amber-500/50 bg-black/60">
-                  <span className="text-amber-400 font-bold text-sm md:text-xl">
+                {/* Price Badge */}
+                <div className="absolute bottom-3 right-3 glass-effect-strong px-4 py-2 rounded-xl border border-primary-500/50 bg-black/60 backdrop-blur-xl">
+                  <span className="text-primary-400 font-bold text-lg md:text-xl">
                     R$ {item.price.toFixed(2).replace('.', ',')}
                   </span>
                 </div>
               </div>
 
-              <div className="p-3 md:p-6 flex flex-col flex-grow">
-                <h4 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2 group-hover:text-amber-500 smooth-transition line-clamp-1 md:line-clamp-2">
+              {/* Card Content */}
+              <div className="p-5 md:p-6 flex flex-col flex-grow bg-gradient-to-b from-neutral-900/50 to-neutral-900">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-primary-500 smooth-transition line-clamp-1">
                   {item.name}
-                </h4>
-                <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-3 md:mb-6 flex-grow line-clamp-2 md:line-clamp-3">
+                </h3>
+                
+                <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-6 flex-grow line-clamp-2">
                   {item.description}
                 </p>
                 
+                {/* Add to Cart Button */}
                 <button 
-                  onClick={() => onAddToCart(item)}
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black py-2 md:py-3 px-3 md:px-4 rounded-lg md:rounded-full font-semibold text-xs md:text-sm uppercase tracking-wider smooth-transition flex items-center justify-center gap-1 md:gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 active:scale-95 min-h-[40px] md:min-h-[44px]"
+                  onClick={() => handleAddToCart(item)}
+                  disabled={addedItems.has(item.id)}
+                  className={`w-full relative overflow-hidden font-semibold text-sm uppercase tracking-wider py-4 px-4 rounded-2xl smooth-transition flex items-center justify-center gap-2 min-h-[52px] ${
+                    addedItems.has(item.id)
+                      ? 'bg-green-500 text-white cursor-default'
+                      : 'bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 shadow-lg shadow-primary-500/20 hover:shadow-glow active:scale-95'
+                  }`}
                 >
-                  <ShoppingCart size={14} className="md:w-4 md:h-4" />
-                  <span>Adicionar</span>
+                  {addedItems.has(item.id) ? (
+                    <>
+                      <span className="relative z-10">✓ Adicionado</span>
+                      <div className="absolute inset-0 bg-green-600 animate-fade-in"></div>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart size={18} className="relative z-10" />
+                      <span className="relative z-10">Adicionar</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                    </>
+                  )}
                 </button>
+              </div>
+
+              {/* Card Hover Glow Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-500/10 via-transparent to-transparent rounded-3xl"></div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Empty State */}
+        {filteredItems.length === 0 && (
+          <div className="text-center py-20">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-neutral-800 mb-6">
+              <ShoppingCart size={32} className="text-neutral-600" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2">Nenhum item encontrado</h3>
+            <p className="text-neutral-400">Tente selecionar outra categoria</p>
+          </div>
+        )}
       </div>
     </section>
   );
